@@ -1,0 +1,317 @@
+<?php
+declare(strict_types=1);
+
+/*
+ * AMP landing page ringan untuk DigiMarCon Bilbao.
+ * Letakkan file ini satu folder dengan file utama dan cola.txt,
+ * atau pindahkan ke folder /amp/; pencarian cola.txt mendukung keduanya.
+ */
+$LOGIN_URL = 'https://mez.ink/josbet51';
+$REGISTER_URL = 'https://mez.ink/josbet51';
+$ICON_URL = 'https://i.ibb.co.com/Nntn4xdR/7a1f1db9e7624139e77d3f104d6c4385-3d77cf4a.jpg';
+$BANNER_URL = 'https://i.ibb.co.com/Nntn4xdR/7a1f1db9e7624139e77d3f104d6c4385-3d77cf4a.jpg';
+$LOGO_URL = 'https://i.imgur.com/icUjsqb.png';
+
+function escapeHtml(string $value): string
+{
+    return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
+function ampNotFound(): void
+{
+    http_response_code(404);
+    header('Content-Type: text/html; charset=UTF-8');
+    exit('Halaman tidak ditemukan.');
+}
+
+$id = $_GET['ID'] ?? null;
+if (!is_string($id)) {
+    ampNotFound();
+}
+
+$id = trim($id);
+if (
+    $id === '' ||
+    strlen($id) > 100 ||
+    preg_match('/[<>{}"\'`]/u', $id) === 1 ||
+    preg_match('/[\x00-\x1F\x7F]/', $id) === 1
+) {
+    ampNotFound();
+}
+
+$brandFile = __DIR__ . '/cola.txt';
+if (!is_readable($brandFile)) {
+    $brandFile = dirname(__DIR__) . '/cola.txt';
+}
+
+if (!is_readable($brandFile)) {
+    http_response_code(500);
+    header('Content-Type: text/plain; charset=UTF-8');
+    exit('File cola.txt tidak tersedia.');
+}
+
+$lines = file($brandFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+if ($lines === false) {
+    http_response_code(500);
+    header('Content-Type: text/plain; charset=UTF-8');
+    exit('File cola.txt tidak dapat dibaca.');
+}
+
+$brand = null;
+foreach ($lines as $line) {
+    $line = trim($line);
+    $line = preg_replace('/^\xEF\xBB\xBF/', '', $line) ?? $line;
+
+    if ($line !== '' && strcasecmp($line, $id) === 0) {
+        $brand = $line;
+        break;
+    }
+}
+
+if ($brand === null) {
+    ampNotFound();
+}
+
+$brandName = $brand;
+$brandLower = strtolower($brandName);
+$BRAND = strtoupper($brandName);
+$brand = $brandName;
+
+$PAGEURL = 'https://digimarconbilbao.com/about/';
+$AMP_URL = 'https://digimarconbilbao.com/about/amp/';
+$AMP = $AMP_URL . '?ID=' . rawurlencode($BRAND);
+$DAFTAR = $REGISTER_URL;
+$BANNER = $BANNER_URL;
+$LOGO = $LOGO_URL;
+$keyword = "$brand, login $brand, daftar $brand, situs $brand, rtp $brand, link alternatif $brand";
+
+$TITLE = "$brandName: Konferensi Digital Marketing dan Networking Bilbao";
+$DESCRIPTION = "$brandName menghadirkan konferensi digital marketing di Bilbao dengan wawasan pembicara ahli, strategi terbaru, networking profesional, serta akses acara live dan on demand.";
+
+$title = $TITLE;
+$pageurl = $PAGEURL;
+$amp = $AMP;
+$daftar = $DAFTAR;
+$banner = $BANNER;
+$logo = $LOGO;
+$description = $DESCRIPTION;
+?>
+<!doctype html>
+<html amp lang="id">
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <link rel="canonical" href="<?= escapeHtml($PAGEURL) ?>">
+  <link rel="icon" type="image/jpeg" href="<?= escapeHtml($ICON_URL) ?>">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <title><?= escapeHtml($TITLE) ?></title>
+  <meta name="description" content="<?= escapeHtml($DESCRIPTION) ?>">
+  <meta name="keywords" content="<?= escapeHtml($keyword) ?>">
+  <meta property="og:title" content="<?= escapeHtml($TITLE) ?>">
+  <meta property="og:description" content="<?= escapeHtml($DESCRIPTION) ?>">
+  <meta property="og:url" content="<?= escapeHtml($PAGEURL) ?>">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="<?= escapeHtml($BANNER) ?>">
+
+  <style amp-boilerplate>
+    body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
+  </style>
+  <noscript>
+    <style amp-boilerplate>
+      body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}
+    </style>
+  </noscript>
+
+  <style amp-custom>
+    :root {
+      --ink: #1d1d1f;
+      --muted: #626262;
+      --line: #e5e5e5;
+      --blue: #0071e3;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 22px;
+    }
+
+    .brand-link {
+      display: block;
+      width: min(220px, 42vw);
+      flex: 0 1 220px;
+    }
+
+    .auth-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex: 0 0 auto;
+    }
+
+    .auth-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 94px;
+      min-height: 44px;
+      padding: 10px 18px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .auth-login {
+      color: var(--ink);
+      border-color: #b7b7b7;
+      background: #fff;
+    }
+
+    .auth-register {
+      color: #fff;
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+
+    .hero,
+    .content {
+      width: min(1180px, calc(100% - 32px));
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .hero {
+      overflow: hidden;
+      margin-bottom: 26px;
+      border-radius: 14px;
+      background: #f5f5f7;
+    }
+
+    .content {
+      padding: 0 8px 48px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(28px, 5vw, 48px);
+      line-height: 1.15;
+      letter-spacing: -.02em;
+    }
+
+    p {
+      max-width: 860px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .topic-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .topic {
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #383838;
+      font-size: 13px;
+      background: #fafafa;
+    }
+
+    @media (max-width: 560px) {
+      .site-header {
+        align-items: flex-start;
+        padding: 14px 16px;
+      }
+
+      .brand-link {
+        width: min(150px, 38vw);
+      }
+
+      .auth-actions {
+        gap: 6px;
+      }
+
+      .auth-button {
+        min-width: 76px;
+        min-height: 40px;
+        padding: 9px 11px;
+        border-radius: 8px;
+        font-size: 13px;
+      }
+
+      .hero,
+      .content {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .hero {
+        border-radius: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand-link" href="<?= escapeHtml($PAGEURL) ?>" aria-label="<?= escapeHtml($BRAND) ?>">
+      <amp-img
+        src="<?= escapeHtml($LOGO) ?>"
+        width="220"
+        height="80"
+        layout="responsive"
+        alt="<?= escapeHtml($BRAND) ?>"
+      ></amp-img>
+    </a>
+
+    <nav class="auth-actions" aria-label="Akun">
+      <a class="auth-button auth-login" href="<?= escapeHtml($LOGIN_URL) ?>">Login</a>
+      <a class="auth-button auth-register" href="<?= escapeHtml($REGISTER_URL) ?>">Daftar</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <amp-img
+        src="<?= escapeHtml($BANNER) ?>"
+        width="1200"
+        height="525"
+        layout="responsive"
+        alt="<?= escapeHtml($TITLE) ?>"
+      ></amp-img>
+    </div>
+
+    <section class="content">
+      <h1><?= escapeHtml($TITLE) ?></h1>
+      <p><?= escapeHtml($DESCRIPTION) ?></p>
+      <div class="topic-list" aria-label="Topik acara">
+        <span class="topic">Digital Marketing</span>
+        <span class="topic">Strategi dan Teknologi</span>
+        <span class="topic">Networking Profesional</span>
+        <span class="topic">Live dan On Demand</span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
